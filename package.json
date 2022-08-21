@@ -1,6 +1,6 @@
 {
   "name": "koch-antisnowflake-cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Print the Koch Anti-Snowflake to the console!",
   "main": "./src/index.js",
   "bin": {
@@ -13,10 +13,14 @@
     "type": "git",
     "url": "https://github.com/spirometaxas/koch-antisnowflake-cli.git"
   },
+  "homepage": "https://spirometaxas.com/projects/fractals-cli",
   "scripts": {
     "cli": "node ./src/cli.js"
   },
-  "author": "Spiro Metaxas",
+  "author": {
+    "name" : "Spiro Metaxas",
+    "url" : "https://spirometaxas.com"
+  },
   "license": "MIT",
   "keywords": [
     "Koch",
@@ -31,6 +35,6 @@
     "unicode"
   ],
   "dependencies": {
-    "koch-snowflake-cli": "^1.0.0"
+    "koch-snowflake-cli": "^1.1.0"
   }
 }

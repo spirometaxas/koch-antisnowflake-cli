@@ -41,16 +41,20 @@ const snowflakeToBoard = function(data) {
   return board;
 }
 
-const drawTriangle = function(board, pos, scale) {
+const drawTriangle = function(board, pos, scale, character) {
   var curW = getWidth(scale);
   var startX = pos.x - parseInt(curW / 2.0);
   var curY = pos.y;
   for (let i = 0; i < getHeight(scale); i++) {
     for (let j = 0; j < curW; j++) {
-      if (j % 2 === 0) {
-        board[curY][startX + j] = '▲';
+      if (character) {
+        board[curY][startX + j] = character;
       } else {
-        board[curY][startX + j] = '▼';
+        if (j % 2 === 0) {
+          board[curY][startX + j] = '▲';
+        } else {
+          board[curY][startX + j] = '▼';
+        }
       }
     }
     curW -= 2;
@@ -107,19 +111,23 @@ const cutSnowflakeRight = function(triangleBoard, snowflakeBoard) {
   }
 }
 
-const create = function(n, scale) {
+const create = function(n, config) {
   if (n === undefined || n < 0) {
     return '';
   }
-  if (scale === undefined || scale < n) {
-    scale = n;
+  
+  let scale = n;
+  if (config && config.scale && config.scale > n) {
+    scale = config.scale;
   }
 
+  const character = config !== undefined && config.character !== undefined && config.character.length === 1 ? config.character : undefined;
+
   const triangleBoard = createBoard(getWidth(scale), getHeight(scale));
-  drawTriangle(triangleBoard, { x: parseInt(getWidth(scale) / 2.0), y: 0 }, scale);
+  drawTriangle(triangleBoard, { x: parseInt(getWidth(scale) / 2.0), y: 0 }, scale, character);
 
   if (n > 0) {
-    const snowflake = koch_snowflake.create(n, scale);
+    const snowflake = koch_snowflake.create(n, { scale: scale });
     const snowflakeBoard = snowflakeToBoard(snowflake);
     cutSnowflakeTop(triangleBoard, snowflakeBoard);
     cutSnowflakeLeft(triangleBoard, snowflakeBoard);
