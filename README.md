@@ -27,7 +27,7 @@ then:
 ```
 const koch_antisnowflake = require('koch-antisnowflake-cli');
 console.log(koch_antisnowflake.create(<n>));
-console.log(koch_antisnowflake.create(<n>, { size: <size>, character: <character> }));
+console.log(koch_antisnowflake.create(<n>, { size: <number>, character: <character> }));
 ```
 The config params are optional.
 
