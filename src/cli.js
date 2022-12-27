@@ -3,13 +3,17 @@ const koch_antisnowflake = require('./index.js');
 
 const printUsage = function(showIntro) {
     if (showIntro) {
-        console.log('\n Print the Koch Anti-Snowflake to the console!');
+        console.log(koch_antisnowflake.create(2));
+        console.log(' Print the Koch Anti-Snowflake to the console!');
     }
     console.log('\n' + 
                 ' Usage:\n' + 
                 '   $ koch-antisnowflake-cli <n>\n' + 
                 '   $ koch-antisnowflake-cli <n> <size>\n' + 
                 '\n' + 
+                '   <n> is the recursive step, a number greater than or equal to 0\n' + 
+                '   <size> is the size to draw, a number greater than or equal to <n>\n' + 
+                '\n' +
                 ' Options:\n' + 
                 '   --character=<character>  Draw using 1 specific character\n');
 }
