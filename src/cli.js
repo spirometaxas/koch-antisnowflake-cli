@@ -15,6 +15,7 @@ const printUsage = function(showIntro) {
                 '   <size> is the size to draw, a number greater than or equal to <n>\n' + 
                 '\n' +
                 ' Options:\n' + 
+                '   --rotate=<rotate>        Rotate the Koch Anti-Snowflake: [flip|standard]\n' +
                 '   --character=<character>  Draw using 1 specific character\n');
 }
 
@@ -40,6 +41,24 @@ const getValues = function(params) {
         }
     }
     return values;
+}
+
+const getRotation = function(flags) {
+    for (let i = 0; i < flags.length; i++) {
+        if (flags[i] && flags[i].toLowerCase().startsWith('--rotate=')) {
+            const line = flags[i].substring(9);
+            if (line) {
+                if (line.toLowerCase() === 'flip' || line.toLowerCase() === 'standard') {
+                    return line.toLowerCase();
+                } else {
+                    console.log('\n Warning: Please provide a supported rotation type: [flip|standard]');
+                }
+            } else {
+                console.log('\n Warning: Please provide a supported rotation type: [flip|standard]');
+            }
+        }
+    }
+    return undefined;
 }
 
 const getCharacter = function(flags) {
@@ -78,7 +97,7 @@ if (process.argv.length > 2) {
             s = n;
         }
         if (n !== undefined && s !== undefined) {
-            console.log(koch_antisnowflake.create(n, { size: s, character: getCharacter(flags) } ));
+            console.log(koch_antisnowflake.create(n, { size: s, rotate: getRotation(flags), character: getCharacter(flags) } ));
         }
     } else {
         console.log('\n <n> should be a number greater than or equal to 0');
